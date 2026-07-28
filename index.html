@@ -28,25 +28,6 @@
       color: #9f1239;
       border: 1px solid #fecdd3;
     }
-    .badge-gurpurab {
-      background-color: #f0fdf4;
-      color: #166534;
-      border: 1px solid #bbf7d0;
-    }
-    .calendar-day-event {
-      position: relative;
-    }
-    .calendar-day-event::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background-color: #0b57d0;
-    }
   </style>
 </head>
 <body class="p-2 sm:p-4 max-w-lg mx-auto min-h-screen flex flex-col justify-between">
@@ -125,7 +106,7 @@
 
   <!-- Footer -->
   <footer class="text-center text-xs text-slate-400 mt-3 mb-1">
-    Nanakshahi Calendar 2026 • Optimized for Mobile
+    Nanakshahi Calendar 2026 • Verified SGPC Dates
   </footer>
 
   <script>
@@ -152,11 +133,10 @@
         desi: "ਮਾਘ - ਫੱਗਣ",
         pooranmashi: [1],
         masya: [17],
-        sangrand: 13,
+        sangrand: 12,
         events: {
           1: "🌕 ਪੂਰਨਮਾਸ਼ੀ (Pooranmashi)",
-          12: "⭐ ਸਾਹਿਬਜ਼ਾਦਾ ਅਜੀਤ ਸਿੰਘ ਜੀ ਜਨਮ ਦਿਹਾੜਾ",
-          13: "☀️ ਫੱਗਣ ਸੰਗ੍ਰਾਂਦ (Phagun Sangrand)",
+          12: "☀️ ਫੱਗਣ ਸੰਗ੍ਰਾਂਦ (Phagun Sangrand)",
           17: "🌑 ਮੱਸਿਆ (Masya)",
           21: "📜 ਸਾਕਾ ਨਨਕਾਣਾ ਸਾਹਿਬ"
         }
@@ -233,10 +213,10 @@
         desi: "ਸਾਉਣ - ਭਾਦੋਂ",
         pooranmashi: [28],
         masya: [12],
-        sangrand: 16,
+        sangrand: 17,
         events: {
           12: "🌑 ਮੱਸਿਆ (Masya)",
-          16: "☀️ ਭਾਦੋਂ ਸੰਗ੍ਰਾਂਦ (Bhadon Sangrand)",
+          17: "☀️ ਭਾਦੋਂ ਸੰਗ੍ਰਾਂਦ (Bhadon Sangrand)",
           28: "🌕 ਰੱਖੜੀ / ਪੂਰਨਮਾਸ਼ੀ (Rakhri)",
           30: "📖 ਪਹਿਲਾ ਪ੍ਰਕਾਸ਼ ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ"
         }
@@ -246,10 +226,10 @@
         desi: "ਭਾਦੋਂ - ਅੱਸੂ",
         pooranmashi: [26],
         masya: [11],
-        sangrand: 16,
+        sangrand: 17,
         events: {
           11: "🌑 ਮੱਸਿਆ (Masya)",
-          16: "☀️ ਅੱਸੂ ਸੰਗ੍ਰਾਂਦ (Assu Sangrand)",
+          17: "☀️ ਅੱਸੂ ਸੰਗ੍ਰਾਂਦ (Assu Sangrand)",
           18: "⭐ ਜੋਤੀ ਜੋਤਿ ਗੁਰੂ ਅਮਰਦਾਸ ਜੀ",
           22: "⭐ ਜੋਤੀ ਜੋਤਿ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ",
           26: "🌕 ਭਾਦੋਂ ਪੂਰਨਮਾਸ਼ੀ"
@@ -262,7 +242,6 @@
         masya: [10],
         sangrand: 17,
         events: {
-          9: "🪔 ਬੰਦੀ ਛੋੜ ਦਿਵਸ / ਦੀਵਾਲੀ (Bandi Chhor Divas)",
           10: "🌑 ਮੱਸਿਆ (Masya)",
           17: "☀️ ਕੱਤਕ ਸੰਗ੍ਰਾਂਦ (Katak Sangrand)",
           26: "🌕 ਕੱਤਕ ਪੂਰਨਮਾਸ਼ੀ"
@@ -272,13 +251,13 @@
         monthIdx: 10,
         desi: "ਕੱਤਕ - ਮੱਘਰ",
         pooranmashi: [24],
-        masya: [9],
+        masya: [8, 9],
         sangrand: 16,
         events: {
-          9: "🌑 ਮੱਸਿਆ (Masya)",
+          9: "🌑 ਮੱਸਿਆ (Katak Masya)",
+          9: "🪔 ਬੰਦੀ ਛੋੜ ਦਿਵਸ / ਦੀਵਾਲੀ (Bandi Chhor Divas)",
           16: "☀️ ਮੱਘਰ ਸੰਗ੍ਰਾਂਦ (Maghar Sangrand)",
-          24: "⭐ ਪ੍ਰਕਾਸ਼ ਗੁਰਪੁਰਬ ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ 🌕",
-          24: "⭐ ਸ਼ਹੀਦੀ ਦਿਹਾੜਾ ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਜੀ"
+          24: "⭐ ਪ੍ਰਕਾਸ਼ ਗੁਰਪੁਰਬ ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ 🌕"
         }
       },
       {
@@ -289,10 +268,11 @@
         sangrand: 16,
         events: {
           8: "🌑 ਮੱਸਿਆ (Masya)",
+          14: "⚔️ ਸ਼ਹੀਦੀ ਦਿਹਾੜਾ ਸ੍ਰੀ ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਜੀ",
           16: "☀️ ਪੋਹ ਸੰਗ੍ਰਾਂਦ (Poh Sangrand)",
-          21: "⚔️ ਸ਼ਹੀਦੀ ਛੋਟੇ ਸਾਹਿਬਜ਼ਾਦੇ",
+          28: "⚔️ ਸ਼ਹੀਦੀ ਛੋਟੇ ਸਾਹਿਬਜ਼ਾਦੇ",
           23: "🌕 ਪੋਹ ਪੂਰਨਮਾਸ਼ੀ",
-          26: "⚔️ ਸਾਕਾ ਚਮਕੌਰ ਸਾਹਿਬ"
+          23: "⚔️ ਸਾਕਾ ਚਮਕੌਰ ਸਾਹਿਬ"
         }
       }
     ];

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Punjabi Jantri (ਪੰਜਾਬੀ ਜੰਤਰੀ ੨੦੨੬)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Gurmukhi', system-ui, -apple-system, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      touch-action: manipulation;
+    }
+    .badge-pooranmashi {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .badge-masya {
+      background-color: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+    .badge-sangrand {
+      background-color: #ffe4e6;
+      color: #9f1239;
+      border: 1px solid #fecdd3;
+    }
+    .badge-gurpurab {
+      background-color: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .calendar-day-event {
+      position: relative;
+    }
+    .calendar-day-event::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #0b57d0;
+    }
+  </style>
+</head>
+<body class="p-2 sm:p-4 max-w-lg mx-auto min-h-screen flex flex-col justify-between">
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex-1 flex flex-col">
+    <!-- Main Header -->
+    <header class="bg-slate-900 text-white p-4 text-center">
+      <h1 class="text-xl font-bold tracking-wide">ਪੰਜਾਬੀ ਜੰਤਰੀ ੨੦੨੬</h1>
+      <p class="text-xs text-slate-300 mt-1">Nanakshahi Calendar & Sikh Holidays 2026</p>
+    </header>
+
+    <!-- Month Navigation Controls -->
+    <div class="p-3 bg-slate-50 border-b border-slate-200">
+      <div class="flex items-center justify-between gap-2">
+        <button id="prev-btn" onclick="navigateMonth(-1)" class="w-10 h-10 flex items-center justify-center bg-white border border-slate-300 rounded-xl text-slate-700 active:bg-slate-100 font-bold shadow-sm">
+          ❮
+        </button>
+        <div class="text-center flex-1">
+          <h2 id="month-display" class="text-lg font-bold text-slate-800">January 2026</h2>
+          <p id="desi-display" class="text-sm font-medium text-amber-700">ਪੋਹ - ਮਾਘ (Poh - Magh)</p>
+        </div>
+        <button id="next-btn" onclick="navigateMonth(1)" class="w-10 h-10 flex items-center justify-center bg-white border border-slate-300 rounded-xl text-slate-700 active:bg-slate-100 font-bold shadow-sm">
+          ❯
+        </button>
+      </div>
+
+      <!-- Quick Month Strip -->
+      <div class="flex overflow-x-auto gap-1.5 mt-3 pb-1 scrollbar-none text-xs" id="month-strip">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Key Dates Badges -->
+    <div class="p-3 grid grid-cols-3 gap-2 text-center text-xs font-semibold border-b border-slate-200 bg-white">
+      <div class="p-2 rounded-xl badge-pooranmashi flex flex-col items-center justify-center">
+        <span class="text-base mb-0.5">🌕</span>
+        <span>ਪੂਰਨਮਾਸ਼ੀ</span>
+        <span id="badge-pooranmashi" class="font-bold mt-1 text-slate-900">-</span>
+      </div>
+      <div class="p-2 rounded-xl badge-masya flex flex-col items-center justify-center">
+        <span class="text-base mb-0.5">🌑</span>
+        <span>ਮੱਸਿਆ</span>
+        <span id="badge-masya" class="font-bold mt-1 text-slate-900">-</span>
+      </div>
+      <div class="p-2 rounded-xl badge-sangrand flex flex-col items-center justify-center">
+        <span class="text-base mb-0.5">☀️</span>
+        <span>ਸੰਗ੍ਰਾਂਦ</span>
+        <span id="badge-sangrand" class="font-bold mt-1 text-slate-900">-</span>
+      </div>
+    </div>
+
+    <!-- Monthly Calendar Grid -->
+    <div class="p-3 bg-white">
+      <div class="grid grid-cols-7 text-center text-xs font-bold text-slate-500 mb-2">
+        <div class="text-red-600">ਐਤ</div>
+        <div>ਸੋਮ</div>
+        <div>ਮੰਗਲ</div>
+        <div>ਬੁੱਧ</div>
+        <div>ਵੀਰ</div>
+        <div>ਸ਼ੁੱਕਰ</div>
+        <div>ਸ਼ਨੀ</div>
+      </div>
+      <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center text-sm font-medium">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Detailed Historical Events & Gurpurabs List -->
+    <div class="p-4 bg-slate-50 border-t border-slate-200 flex-1">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">ਇਸ ਮਹੀਨੇ ਦੇ ਮੁੱਖ ਦਿਹਾੜੇ (Gurpurabs & Events)</h3>
+      <div id="events-list" class="space-y-2">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-400 mt-3 mb-1">
+    Nanakshahi Calendar 2026 • Optimized for Mobile
+  </footer>
+
+  <script>
+    const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const MONTHS_PA = ["ਜਨਵਰੀ", "ਫ਼ਰਵਰੀ", "ਮਾਰਚ", "ਅਪ੍ਰੈਲ", "ਮਈ", "ਜੂਨ", "ਜੁਲਾਈ", "ਅਗਸਤ", "ਸਤੰਬਰ", "ਅਕਤੂਬਰ", "ਨਵੰਬਰ", "ਦਸੰਬਰ"];
+
+    const JANTRI_DATA = [
+      {
+        monthIdx: 0,
+        desi: "ਪੋਹ - ਮਾਘ",
+        pooranmashi: [3],
+        masya: [18],
+        sangrand: 14,
+        events: {
+          3: "🌕 ਪੂਰਨਮਾਸ਼ੀ (Pooranmashi)",
+          5: "⭐ ਗੁਰੂ ਗੋਬਿੰਦ ਸਿੰਘ ਜੀ ਪ੍ਰਕਾਸ਼ ਗੁਰਪੁਰਬ",
+          14: "☀️ ਮਾਘੀ (Maghi Sangrand)",
+          18: "🌑 ਮੱਸਿਆ (Masya)",
+          26: "🇮🇳 ਗਣਤੰਤਰ ਦਿਵਸ (Republic Day)"
+        }
+      },
+      {
+        monthIdx: 1,
+        desi: "ਮਾਘ - ਫੱਗਣ",
+        pooranmashi: [1],
+        masya: [17],
+        sangrand: 13,
+        events: {
+          1: "🌕 ਪੂਰਨਮਾਸ਼ੀ (Pooranmashi)",
+          12: "⭐ ਸਾਹਿਬਜ਼ਾਦਾ ਅਜੀਤ ਸਿੰਘ ਜੀ ਜਨਮ ਦਿਹਾੜਾ",
+          13: "☀️ ਫੱਗਣ ਸੰਗ੍ਰਾਂਦ (Phagun Sangrand)",
+          17: "🌑 ਮੱਸਿਆ (Masya)",
+          21: "📜 ਸਾਕਾ ਨਨਕਾਣਾ ਸਾਹਿਬ"
+        }
+      },
+      {
+        monthIdx: 2,
+        desi: "ਫੱਗਣ - ਚੇਤ",
+        pooranmashi: [3],
+        masya: [18],
+        sangrand: 14,
+        events: {
+          3: "🌕 ਹੋਲਾ ਮਹੱਲਾ / ਪੂਰਨਮਾਸ਼ੀ (Holla Mohalla)",
+          14: "☀️ ਨਾਨਕਸ਼ਾਹੀ ਨਵਾਂ ਸਾਲ ੫੫੮ (Chet Sangrand)",
+          18: "🌑 ਮੱਸਿਆ (Masya)",
+          19: "⭐ ਜੋਤੀ ਜੋਤਿ ਗੁਰੂ ਹਰਗੋਬਿੰਦ ਸਾਹਿਬ ਜੀ"
+        }
+      },
+      {
+        monthIdx: 3,
+        desi: "ਚੇਤ - ਵੈਸਾਖ",
+        pooranmashi: [2],
+        masya: [17],
+        sangrand: 14,
+        events: {
+          2: "🌕 ਪੂਰਨਮਾਸ਼ੀ (Pooranmashi)",
+          14: "☀️ ਖਾਲਸਾ ਸਾਜਨਾ ਦਿਵਸ / ਵੈਸਾਖੀ (Vaisakhi)",
+          17: "🌑 ਮੱਸਿਆ (Masya)",
+          18: "⭐ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਗੁਰੂ ਅੰਗਦ ਦੇਵ ਜੀ & ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਜੀ"
+        }
+      },
+      {
+        monthIdx: 4,
+        desi: "ਵੈਸਾਖ - ਜੇਠ",
+        pooranmashi: [1, 30],
+        masya: [16],
+        sangrand: 15,
+        events: {
+          1: "🌕 ਵੈਸਾਖ ਪੂਰਨਮਾਸ਼ੀ",
+          15: "☀️ ਜੇਠ ਸੰਗ੍ਰਾਂਦ (Jeth Sangrand)",
+          16: "🌑 ਮੱਸਿਆ (Masya)",
+          23: "⭐ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਗੁਰੂ ਅਮਰਦਾਸ ਜੀ",
+          30: "🌕 ਅਧਿਕ ਜੇਠ ਪੂਰਨਮਾਸ਼ੀ"
+        }
+      },
+      {
+        monthIdx: 5,
+        desi: "ਜੇਠ - ਹਾੜ",
+        pooranmashi: [29],
+        masya: [15],
+        sangrand: 15,
+        events: {
+          15: "☀️ ਹਾੜ ਸੰਗ੍ਰਾਂਦ (Harh Sangrand)",
+          15: "🌑 ਮੱਸਿਆ (Masya)",
+          18: "⭐ ਸ਼ਹੀਦੀ ਦਿਹਾੜਾ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਜੀ",
+          29: "🌕 ਪੂਰਨਮਾਸ਼ੀ (Pooranmashi) & ਬਰਸੀ ਮਹਾਰਾਜਾ ਰਣਜੀਤ ਸਿੰਘ"
+        }
+      },
+      {
+        monthIdx: 6,
+        desi: "ਹਾੜ - ਸਾਉਣ",
+        pooranmashi: [29],
+        masya: [14],
+        sangrand: 16,
+        events: {
+          5: "⭐ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਗੁਰੂ ਹਰਗੋਬਿੰਦ ਸਾਹਿਬ ਜੀ",
+          14: "🌑 ਮੱਸਿਆ (Masya)",
+          16: "☀️ ਸਾਉਣ ਸੰਗ੍ਰਾਂਦ (Sawan Sangrand)",
+          23: "⭐ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਗੁਰੂ ਹਰਿਕ੍ਰਿਸ਼ਨ ਸਾਹਿਬ ਜੀ",
+          29: "🌕 ਸਾਉਣ ਪੂਰਨਮਾਸ਼ੀ"
+        }
+      },
+      {
+        monthIdx: 7,
+        desi: "ਸਾਉਣ - ਭਾਦੋਂ",
+        pooranmashi: [28],
+        masya: [12],
+        sangrand: 16,
+        events: {
+          12: "🌑 ਮੱਸਿਆ (Masya)",
+          16: "☀️ ਭਾਦੋਂ ਸੰਗ੍ਰਾਂਦ (Bhadon Sangrand)",
+          28: "🌕 ਰੱਖੜੀ / ਪੂਰਨਮਾਸ਼ੀ (Rakhri)",
+          30: "📖 ਪਹਿਲਾ ਪ੍ਰਕਾਸ਼ ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ"
+        }
+      },
+      {
+        monthIdx: 8,
+        desi: "ਭਾਦੋਂ - ਅੱਸੂ",
+        pooranmashi: [26],
+        masya: [11],
+        sangrand: 16,
+        events: {
+          11: "🌑 ਮੱਸਿਆ (Masya)",
+          16: "☀️ ਅੱਸੂ ਸੰਗ੍ਰਾਂਦ (Assu Sangrand)",
+          18: "⭐ ਜੋਤੀ ਜੋਤਿ ਗੁਰੂ ਅਮਰਦਾਸ ਜੀ",
+          22: "⭐ ਜੋਤੀ ਜੋਤਿ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ",
+          26: "🌕 ਭਾਦੋਂ ਪੂਰਨਮਾਸ਼ੀ"
+        }
+      },
+      {
+        monthIdx: 9,
+        desi: "ਅੱਸੂ - ਕੱਤਕ",
+        pooranmashi: [26],
+        masya: [10],
+        sangrand: 17,
+        events: {
+          9: "🪔 ਬੰਦੀ ਛੋੜ ਦਿਵਸ / ਦੀਵਾਲੀ (Bandi Chhor Divas)",
+          10: "🌑 ਮੱਸਿਆ (Masya)",
+          17: "☀️ ਕੱਤਕ ਸੰਗ੍ਰਾਂਦ (Katak Sangrand)",
+          26: "🌕 ਕੱਤਕ ਪੂਰਨਮਾਸ਼ੀ"
+        }
+      },
+      {
+        monthIdx: 10,
+        desi: "ਕੱਤਕ - ਮੱਘਰ",
+        pooranmashi: [24],
+        masya: [9],
+        sangrand: 16,
+        events: {
+          9: "🌑 ਮੱਸਿਆ (Masya)",
+          16: "☀️ ਮੱਘਰ ਸੰਗ੍ਰਾਂਦ (Maghar Sangrand)",
+          24: "⭐ ਪ੍ਰਕਾਸ਼ ਗੁਰਪੁਰਬ ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ 🌕",
+          24: "⭐ ਸ਼ਹੀਦੀ ਦਿਹਾੜਾ ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਜੀ"
+        }
+      },
+      {
+        monthIdx: 11,
+        desi: "ਮੱਘਰ - ਪੋਹ",
+        pooranmashi: [23],
+        masya: [8],
+        sangrand: 16,
+        events: {
+          8: "🌑 ਮੱਸਿਆ (Masya)",
+          16: "☀️ ਪੋਹ ਸੰਗ੍ਰਾਂਦ (Poh Sangrand)",
+          21: "⚔️ ਸ਼ਹੀਦੀ ਛੋਟੇ ਸਾਹਿਬਜ਼ਾਦੇ",
+          23: "🌕 ਪੋਹ ਪੂਰਨਮਾਸ਼ੀ",
+          26: "⚔️ ਸਾਕਾ ਚਮਕੌਰ ਸਾਹਿਬ"
+        }
+      }
+    ];
+
+    let currentMonthIdx = 0;
+
+    function renderApp() {
+      const data = JANTRI_DATA[currentMonthIdx];
+      
+      // Update Month and Desi Titles
+      document.getElementById('month-display').innerText = `${MONTHS_EN[currentMonthIdx]} 2026 (${MONTHS_PA[currentMonthIdx]})`;
+      document.getElementById('desi-display').innerText = data.desi;
+
+      // Update Badges
+      document.getElementById('badge-pooranmashi').innerText = data.pooranmashi.join(', ') + ' ' + MONTHS_EN[currentMonthIdx].substring(0, 3);
+      document.getElementById('badge-masya').innerText = data.masya.join(', ') + ' ' + MONTHS_EN[currentMonthIdx].substring(0, 3);
+      document.getElementById('badge-sangrand').innerText = data.sangrand + ' ' + MONTHS_EN[currentMonthIdx].substring(0, 3);
+
+      // Render Month Selection Strip
+      const monthStripEl = document.getElementById('month-strip');
+      monthStripEl.innerHTML = MONTHS_EN.map((m, idx) => `
+        <button onclick="setMonth(${idx})" class="px-3 py-1.5 rounded-lg whitespace-nowrap font-medium transition ${idx === currentMonthIdx ? 'bg-blue-600 text-white font-bold' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'}">
+          ${m.substring(0, 3)}
+        </button>
+      `).join('');
+
+      // Render Calendar Grid
+      const calendarGridEl = document.getElementById('calendar-grid');
+      calendarGridEl.innerHTML = '';
+
+      const firstDay = new Date(2026, currentMonthIdx, 1).getDay();
+      const daysInMonth = new Date(2026, currentMonthIdx + 1, 0).getDate();
+
+      // Empty lead days
+      for (let i = 0; i < firstDay; i++) {
+        calendarGridEl.innerHTML += `<div class="h-10"></div>`;
+      }
+
+      // Render Day Cells
+      for (let day = 1; day <= daysInMonth; day++) {
+        const isPooranmashi = data.pooranmashi.includes(day);
+        const isMasya = data.masya.includes(day);
+        const isSangrand = data.sangrand === day;
+        const isEvent = !!data.events[day];
+
+        let cellClass = "h-10 flex flex-col items-center justify-center rounded-lg relative cursor-default border border-slate-100 ";
+        
+        if (isPooranmashi) {
+          cellClass += "bg-amber-100 text-amber-900 font-bold border-amber-300";
+        } else if (isSangrand) {
+          cellClass += "bg-rose-100 text-rose-900 font-bold border-rose-300";
+        } else if (isMasya) {
+          cellClass += "bg-slate-200 text-slate-900 font-bold border-slate-300";
+        } else if (isEvent) {
+          cellClass += "bg-blue-50 text-blue-900 font-bold border-blue-200";
+        } else {
+          cellClass += "bg-slate-50 text-slate-800 hover:bg-slate-100";
+        }
+
+        let icon = "";
+        if (isPooranmashi) icon = "🌕";
+        else if (isMasya) icon = "🌑";
+        else if (isSangrand) icon = "☀️";
+        else if (isEvent) icon = "⭐";
+
+        calendarGridEl.innerHTML += `
+          <div class="${cellClass}">
+            <span>${day}</span>
+            ${icon ? `<span class="text-[9px] -mt-1">${icon}</span>` : ''}
+          </div>
+        `;
+      }
+
+      // Render Events List
+      const eventsListEl = document.getElementById('events-list');
+      eventsListEl.innerHTML = '';
+
+      const eventEntries = Object.entries(data.events);
+      if (eventEntries.length === 0) {
+        eventsListEl.innerHTML = `<p class="text-xs text-slate-400 text-center py-2">ਕੋਈ ਵਿਸ਼ੇਸ਼ ਦਿਹਾੜਾ ਦਰਜ ਨਹੀਂ ਹੈ</p>`;
+      } else {
+        eventEntries.forEach(([day, eventName]) => {
+          eventsListEl.innerHTML += `
+            <div class="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm">
+              <span class="font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded-md min-w-[60px] text-center">${day} ${MONTHS_EN[currentMonthIdx].substring(0, 3)}</span>
+              <span class="font-semibold text-slate-800 text-right">${eventName}</span>
+            </div>
+          `;
+        });
+      }
+    }
+
+    function navigateMonth(direction) {
+      currentMonthIdx += direction;
+      if (currentMonthIdx < 0) currentMonthIdx = 11;
+      if (currentMonthIdx > 11) currentMonthIdx = 0;
+      renderApp();
+    }
+
+    function setMonth(idx) {
+      currentMonthIdx = idx;
+      renderApp();
+    }
+
+    // Initialize View
+    renderApp();
+  </script>
+</body>
+</html>
